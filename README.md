@@ -61,25 +61,6 @@ A student submits a career planning question (e.g., *"Should I focus on ML or ba
 
 ---
 
-## Shared State Design
-
-All inter-agent communication occurs through `AssistantState`, a Pydantic model with the following fields:
-
-```python
-user_input: str                      # Original student query
-interpreted_goal: Optional[str]      # Agent-parsed goal
-extracted_constraints: Optional[list[str]]    # Explicit constraints from user input
-missing_information: Optional[list[str]]      # Gaps to strengthen analysis
-confidence_score: Optional[float]    # Agent confidence (0.0–1.0)
-decision_type: Optional[str]         # "comparison" or "direct_path"
-recommendations: Optional[dict]      # Structured recommendations
-final_response: Optional[str]        # Final text returned to student
-```
-
-**Key design principle:** Each agent reads specific fields and writes to new fields. Agents never call each other; they only modify state. LangGraph orchestrates the pipeline and passes the updated state between nodes.
-
----
-
 ## Decision Type Classification
 
 The Domain Reasoning Agent automatically classifies queries as:
@@ -164,6 +145,9 @@ The system prints:
 4. Final response tailored to the query
 
 ---
+## Example
+<img width="1099" height="809" alt="image" src="https://github.com/user-attachments/assets/fb181961-9b40-4694-982e-5f2675fc44c6" />
+
 
 ## Project Structure
 
